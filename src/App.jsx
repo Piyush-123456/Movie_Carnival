@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { fetchDataFromApi} from './utils/api'
-import { getApiConfiguration,getGenres } from './store/homeSlice';
+import { fetchDataFromApi } from './utils/api'
+import { getApiConfiguration, getGenres } from './store/homeSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from './component/header/Header'
@@ -23,27 +23,27 @@ function App() {
     fetchDataFromApi('/configuration').then((res) => {
       console.log(res);
       const url = {
-        backdrop : res.images.secure_base_url + "original",
-        poster : res.images.secure_base_url + "original",
-        profile : res.images.secure_base_url + "original",
-        
+        backdrop: res.images.secure_base_url + "original",
+        poster: res.images.secure_base_url + "original",
+        profile: res.images.secure_base_url + "original",
+
       }
       dispatch(getApiConfiguration(url))
     });
   };
 
-  const genresCall = async()=>{
+  const genresCall = async () => {
     let promises = []
-    let endPoints = ["tv","movie"]
-    let allGenres = { 
+    let endPoints = ["tv", "movie"]
+    let allGenres = {
 
     }
-    endPoints.forEach((url)=>{
-        promises.push(fetchDataFromApi(`/genre/${url}/list`)) 
+    endPoints.forEach((url) => {
+      promises.push(fetchDataFromApi(`/genre/${url}/list`))
     })
     const data = await Promise.all(promises);
-    data.map(({genres})=>{
-      return genres.map((item)=>(
+    data.map(({ genres }) => {
+      return genres.map((item) => (
         allGenres[item.id] = item
       ))
     })
@@ -51,13 +51,13 @@ function App() {
   }
   return (
     <BrowserRouter>
-    <Header/>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path='/:mediaType/:id' element={<Details/>}/>
-      <Route path='/search/:query' element={<SearchResult></SearchResult>}/>
-      <Route path='/explore/:mediaType' element={<Explore></Explore>}/>
-      <Route path='*' element={<PageNotFound/>}/>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path='/:mediaType/:id' element={<Details />} />
+        <Route path='/search/:query' element={<SearchResult></SearchResult>} />
+        <Route path='/explore/:mediaType' element={<Explore></Explore>} />
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer></Footer>
     </BrowserRouter>

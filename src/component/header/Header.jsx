@@ -73,10 +73,10 @@ const Header = () => {
   }
 
   return (
-    <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
+    <header className={`header ${mobileMenu ? "mobileView" : ""} ${show} `}>
       <ContentWrapper>
         <div className="logo">
-          <img src={logo} alt="" />
+          <h1 style={{fontFamily:"gilroy", color:"white",fontWeight:"bolder",fontSize:"25px"}}>Movie Carnival</h1>
         </div>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>

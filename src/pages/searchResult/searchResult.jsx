@@ -22,7 +22,7 @@ const searchResult = () => {
       (res) => {
         setData(res);
         setPageNum((prev) => prev + 1);
-        setLoading(false);c
+        setLoading(false); 
       }
     );
   };
@@ -58,17 +58,17 @@ const searchResult = () => {
             <>
               <div className="pageTitle">
                 {`Search ${data?.total_results > 1
-                    ? "results"
-                    : "result"
+                  ? "results"
+                  : "result"
                   } of '${query}'`}
               </div>
-              <InfiniteScroll className="content" dataLength={data.results.length || []} next={fetchNextPageData} hasMore={pageNum <= data.total_pages} loader={<Spinner></Spinner>}> 
-                {data?.results.map((item,index)=>{
-                  if(item.media_type === 'person'){
+              <InfiniteScroll className="content" dataLength={data.results.length || []} next={fetchNextPageData} hasMore={pageNum <= data.total_pages} loader={<Spinner></Spinner>}>
+                {data?.results.map((item, index) => {
+                  if (item.media_type === 'person') {
                     return
                   }
                   return (
-                    <MovieCard key={index} data={item} fromSearch={true}/>
+                    <MovieCard key={index} data={item} fromSearch={true} />
                   )
                 })}
               </InfiniteScroll>
